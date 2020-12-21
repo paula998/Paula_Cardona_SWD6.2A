@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShoppingCart.Data.Context;
 using ShoppingCart.IOC;
-//test
+
 namespace Presentation
 {
     public class Startup
