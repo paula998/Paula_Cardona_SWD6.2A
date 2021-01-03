@@ -21,6 +21,8 @@ namespace ShoppingCart.Application.ViewModels
         [Required]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
         public double Price { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please input a description")]
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public CategoryViewModel Category { get; set; }
