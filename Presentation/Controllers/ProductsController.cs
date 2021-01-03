@@ -24,14 +24,13 @@ namespace Presentation.Controllers
         private IProductsService _productsService;
         private ICategoriesService _categoriesService;
         private IWebHostEnvironment _env;
-        private ShoppingCartDbContext _context;
+
         public ProductsController(IProductsService productsService,
-            ICategoriesService categoriesService, IWebHostEnvironment env, ShoppingCartDbContext context)
+            ICategoriesService categoriesService, IWebHostEnvironment env)
         {
             _productsService = productsService;
             _categoriesService = categoriesService;
             _env = env;
-            _context = context;
         }
 
         /// <summary>
@@ -54,17 +53,7 @@ namespace Presentation.Controllers
             return View(list);
         }
 
-        public IActionResult Index2()
-        {
-            //IQueryable
-            //IEnumerable
-            //List >>>> IEnumerable >>> IQueryable
-
-            var list = _productsService.GetProducts();
-
-            return View(list);
-        }
-
+ 
         public IActionResult Details(Guid id)
         {
             var myProduct = _productsService.GetProduct(id);
@@ -139,7 +128,8 @@ namespace Presentation.Controllers
             return View(model);
         }
 
-
+        [HttpPost] 
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(Guid id)
         {
             _productsService.DeleteProduct(id);
