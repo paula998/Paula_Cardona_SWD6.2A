@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ShoppingCart.Domain.Models;
 
 namespace Presentation.Data
 {
@@ -12,5 +13,8 @@ namespace Presentation.Data
             : base(options)
         {
         }
+
+    
+
     }
 }

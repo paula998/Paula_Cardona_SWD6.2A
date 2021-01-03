@@ -6,11 +6,15 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Presentation.Data;
 using Presentation.Models;
+using ReflectionIT.Mvc.Paging;
 using ShoppingCart.Application.Interfaces;
 using ShoppingCart.Application.Services;
 using ShoppingCart.Application.ViewModels;
-
+using ShoppingCart.Data.Context;
+using ShoppingCart.Domain.Models;
 
 namespace Presentation.Controllers
 {
@@ -20,26 +24,44 @@ namespace Presentation.Controllers
         private IProductsService _productsService;
         private ICategoriesService _categoriesService;
         private IWebHostEnvironment _env;
+        private ShoppingCartDbContext _context;
         public ProductsController(IProductsService productsService,
-            ICategoriesService categoriesService, IWebHostEnvironment env)
+            ICategoriesService categoriesService, IWebHostEnvironment env, ShoppingCartDbContext context)
         {
             _productsService = productsService;
             _categoriesService = categoriesService;
             _env = env;
+            _context = context;
         }
 
         /// <summary>
         /// Products Catalogue
         /// </summary>
         /// <returns></returns>
-        public IActionResult Index()
+        public IActionResult Index(int pageNumber=1, int pageSize=10)
         {
             //IQueryable
             //IEnumerable
             //List >>>> IEnumerable >>> IQueryable
-            
+            //https://www.youtube.com/watch?v=YtBNdMMIMs0&ab_channel=StudyMash
+
+            int ExcludeRecords = (pageSize * pageNumber) - pageSize;
+
+            var list = _productsService.GetProducts()
+                .Skip(ExcludeRecords)
+                .Take(pageSize);
+           
+            return View(list);
+        }
+
+        public IActionResult Index2()
+        {
+            //IQueryable
+            //IEnumerable
+            //List >>>> IEnumerable >>> IQueryable
+
             var list = _productsService.GetProducts();
-            
+
             return View(list);
         }
 

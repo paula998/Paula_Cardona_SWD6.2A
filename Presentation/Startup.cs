@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShoppingCart.Data.Context;
 using ShoppingCart.IOC;
+using ReflectionIT.Mvc.Paging;
 
 namespace Presentation
 {
@@ -42,10 +43,11 @@ namespace Presentation
                   .AddDefaultTokenProviders();
 
 
-
+   
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddCloudscribePagination();
 
 
             services.Configure<IdentityOptions>(options => 

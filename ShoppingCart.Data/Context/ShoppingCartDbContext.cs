@@ -22,8 +22,9 @@ namespace ShoppingCart.Data.Context
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<OrderDetails> OrderDetails { get; set; }
+        public object Product { get; set; }
 
-       // public DbSet<ProductImage> ProductImages { get; set; }
+        // public DbSet<ProductImage> ProductImages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
