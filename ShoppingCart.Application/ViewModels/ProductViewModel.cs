@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoppingCart.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -27,7 +28,7 @@ namespace ShoppingCart.Application.ViewModels
         public string ImageUrl { get; set; }
         public CategoryViewModel Category { get; set; }
 
-
-
     }
+
+   
 }

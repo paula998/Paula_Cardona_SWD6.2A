@@ -29,6 +29,7 @@ namespace ShoppingCart.Data.Repositories
             var myProduct = GetProduct(id);
             _context.Products.Remove(myProduct);
             _context.SaveChanges();
+            
         }
 
         public Product GetProduct(Guid id)
@@ -41,5 +42,7 @@ namespace ShoppingCart.Data.Repositories
         {
             return _context.Products;
         }
+
+   
     }
 }

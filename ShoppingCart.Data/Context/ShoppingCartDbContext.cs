@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ShoppingCart.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ShoppingCart.Data.Context
@@ -22,7 +23,10 @@ namespace ShoppingCart.Data.Context
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<OrderDetails> OrderDetails { get; set; }
+
+        public DbSet<Cart> CartDetails { get; set; }
         public object Product { get; set; }
+        public IQueryable<Cart> Carts { get; internal set; }
 
         // public DbSet<ProductImage> ProductImages { get; set; }
 

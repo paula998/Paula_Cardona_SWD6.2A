@@ -37,8 +37,9 @@ namespace Presentation.Controllers
         /// Products Catalogue
         /// </summary>
         /// <returns></returns>
-        public IActionResult Index(int pageNumber=1, int pageSize=10)
+        public IActionResult Index(int pageNumber = 1, int pageSize = 10)
         {
+          
             //IQueryable
             //IEnumerable
             //List >>>> IEnumerable >>> IQueryable
@@ -133,7 +134,7 @@ namespace Presentation.Controllers
         public IActionResult Delete(Guid id)
         {
             _productsService.DeleteProduct(id);
-            TempData["feedback"] = "Product was deleted successfully"; //change wherever we are using ViewData to use TempData data
+             TempData["feedback"] = "Product was deleted successfully"; //change wherever we are using ViewData to use TempData data
             return RedirectToAction("Index");
         }
 
