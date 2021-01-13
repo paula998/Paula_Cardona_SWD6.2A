@@ -24,13 +24,14 @@ namespace Presentation.Controllers
         private IProductsService _productsService;
         private ICategoriesService _categoriesService;
         private IWebHostEnvironment _env;
-
+        private ICartsService _cartsService;
         public ProductsController(IProductsService productsService,
-            ICategoriesService categoriesService, IWebHostEnvironment env)
+            ICategoriesService categoriesService, ICartsService cartsService, IWebHostEnvironment env)
         {
             _productsService = productsService;
             _categoriesService = categoriesService;
             _env = env;
+            _cartsService = cartsService;
         }
 
         /// <summary>
@@ -54,7 +55,6 @@ namespace Presentation.Controllers
             return View(list);
         }
 
- 
         public IActionResult Details(Guid id)
         {
             var myProduct = _productsService.GetProduct(id);
@@ -90,7 +90,6 @@ namespace Presentation.Controllers
             //    ViewData["Warning"] = "Name cannot be left empty";
             //    return View();
             //}
-
 
             try
             {
@@ -129,13 +128,25 @@ namespace Presentation.Controllers
             return View(model);
         }
 
-        [HttpPost] 
-        [Authorize(Roles = "Admin")]
+       
         public IActionResult Delete(Guid id)
         {
             _productsService.DeleteProduct(id);
              TempData["feedback"] = "Product was deleted successfully"; //change wherever we are using ViewData to use TempData data
             return RedirectToAction("Index");
+        }
+
+        public IActionResult HideProduct(Guid id)
+        {
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult AddToCart(CreateCartModel data)
+        {
+            _cartsService.AddCart(data.Cart);
+
+            return View(data);
         }
 
 

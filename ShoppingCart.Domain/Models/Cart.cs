@@ -12,10 +12,9 @@ namespace ShoppingCart.Domain.Models
 
         public string ProductName { get; set; }
 
-        public double Price { get; set; }
-
         public int Quantity { get; set; }
 
+        
         public string UserEmail { get; set; }
 
 

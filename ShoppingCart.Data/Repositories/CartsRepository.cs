@@ -21,7 +21,9 @@ namespace ShoppingCart.Data.Repositories
         public void AddItem(Cart c)
         {
             _context.CartDetails.Add(c);
+            _context.SaveChanges();
         }
+
 
         public IQueryable<Cart> GetProductsCart()
         {

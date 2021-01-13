@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<ShoppingCart.Application.ViewModels.ProductViewModel>
 
+
 @{ ViewData["Title"] = "Index"; }
 
 <h1>Products Catalogue</h1>
@@ -10,9 +11,9 @@
         <form asp-action="Index" method="get">
             <div>
                 <p>
-                    Category <input type="text" name="searchString" value=""/>
-                    <input type="submit" value="Search" class="btn btn-info"/>
-                    <a asp-action="Index"></a>
+                    Category <input type="text" name="searchString" value="" />
+                    <input type="submit" value="Search" class="btn btn-info" />
+                    <a asp-action="Filter"></a>
                 </p>
             </div>
         </form>
@@ -26,12 +27,16 @@
                         <h5 class="card-title">@product.Name</h5>
                         <p class="card-text">€@product.Price</p>
                         <a href="/Products/Details?id=@product.Id" class="btn btn-primary">View Specifications</a>
-                        <a href="/Products/ShoppingCart?id=@product.Id" class="btn btn-success">Add to shopping cart</a>
+                        <a class="btn btn-info">Hide Product</a>
                         <a href="/Products/Delete?id=@product.Id" onclick="return window.confirm('Are you sure?')" class="btn btn-danger">Delete</a>
+                        <a asp-action="AddToCart" class="btn btn-secondary">Add to Shopping Cart</a>
                     </div>
                 </div>
             </div>
+           
         }
+
+
     </div>
 
 </div>

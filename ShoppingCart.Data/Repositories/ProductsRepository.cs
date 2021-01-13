@@ -43,6 +43,11 @@ namespace ShoppingCart.Data.Repositories
             return _context.Products;
         }
 
-   
+        public void HideProduct(Guid id)
+        {
+           
+           
+
+        }
     }
 }
