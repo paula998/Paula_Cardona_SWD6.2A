@@ -38,28 +38,46 @@ namespace Presentation.Controllers
         /// Products Catalogue
         /// </summary>
         /// <returns></returns>
+
         public IActionResult Index(int pageNumber = 1, int pageSize = 10)
         {
-          
-            //IQueryable
-            //IEnumerable
-            //List >>>> IEnumerable >>> IQueryable
-            //https://www.youtube.com/watch?v=YtBNdMMIMs0&ab_channel=StudyMash
+            try
+            {
+                //IQueryable
+                //IEnumerable
+                //List >>>> IEnumerable >>> IQueryable
+                //https://www.youtube.com/watch?v=YtBNdMMIMs0&ab_channel=StudyMash
 
-            int ExcludeRecords = (pageSize * pageNumber) - pageSize;
+                int ExcludeRecords = (pageSize * pageNumber) - pageSize;
 
-            var list = _productsService.GetProducts()
-                .Skip(ExcludeRecords)
-                .Take(pageSize);
-           
-            return View(list);
+                var list = _productsService.GetProducts()
+                    .Skip(ExcludeRecords)
+                    .Take(pageSize);
+
+                return View(list);
+            }
+
+            catch(Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
+       
         public IActionResult Details(Guid id)
         {
-            var myProduct = _productsService.GetProduct(id);
+            try
+            {
+                var myProduct = _productsService.GetProduct(id);
 
-            return View(myProduct);
+                return View(myProduct);
+            }
+
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
 
         }
 
@@ -136,19 +154,21 @@ namespace Presentation.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult HideProduct(Guid id)
+        public IActionResult AddToCart(string email, Guid productId, int qty)
         {
+            try
+            {
+                _cartsService.AddToCart(email, productId, qty);
+                TempData["feedback"] = "Product has been added to the cart";
+                return RedirectToAction("Index");
+            }
 
-            return RedirectToAction("Index");
+            catch (Exception ex) {
+
+                return RedirectToAction("Error", "Home");
+            }
         }
 
-        public IActionResult AddToCart(CreateCartModel data)
-        {
-            _cartsService.AddCart(data.Cart);
-
-            return View(data);
-        }
-
-
+    
     }
 }

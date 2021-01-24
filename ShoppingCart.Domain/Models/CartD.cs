@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace ShoppingCart.Application.ViewModels
+namespace ShoppingCart.Domain.Models
 {
-    public class CartViewModel
+   public class CartD
     {
-     
+        [Key]
         public Guid CartId { get; set; }
 
-        public string ProductName { get; set; }
-
-        public double Price { get; set; }
+        public Guid ProductId_FK { get; set; }
 
         public int Quantity { get; set; }
 
         public string UserEmail { get; set; }
+
+
     }
 }

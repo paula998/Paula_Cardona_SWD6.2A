@@ -9,9 +9,9 @@ namespace ShoppingCart.Application.Interfaces
 {
   public interface ICartsService
     {
-         IQueryable<CartViewModel> GetProductsCart();
+        void AddToCart(string email, Guid productId, int qty);
 
-        void AddCart(CartViewModel data);
+        void UpdateQtyInCart(string email, Guid productId, int qty);
 
     }
 }

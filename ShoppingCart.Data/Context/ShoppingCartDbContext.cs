@@ -21,12 +21,11 @@ namespace ShoppingCart.Data.Context
         public DbSet<Member> Members { get; set; }
 
         public DbSet<Order> Orders { get; set; }
+        public DbSet<CartD> CartDetails { get; set; }
 
-        public DbSet<OrderDetails> OrderDetails { get; set; }
+        //public object Product { get; set; }
 
-        public DbSet<Cart> CartDetails { get; set; }
-        public object Product { get; set; }
-        public IQueryable<Cart> Carts { get; internal set; }
+        // public IQueryable<Cart> Carts { get; internal set; }
 
         // public DbSet<ProductImage> ProductImages { get; set; }
 

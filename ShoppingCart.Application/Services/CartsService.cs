@@ -13,27 +13,40 @@ namespace ShoppingCart.Application.Services
 {
     public class CartsService : ICartsService
     {
-        private ICartsRepository _cartsRepo;
+        private ICartRepository _cartRepo;
         private IMapper _mapper;
 
-        public CartsService(ICartsRepository cartsRepo, IMapper mapper)
+        public CartsService(ICartRepository cartRepo, IMapper mapper)
         {
-            _cartsRepo = cartsRepo;
+            _cartRepo = cartRepo;
             _mapper = mapper;
         }
 
-        public void AddCart(CartViewModel data)
+        public void AddToCart(string email, Guid productId, int qty)
         {
-            var c = _mapper.Map<Cart>(data);
-            _cartsRepo.AddItem(c);
+            CartD c = _cartRepo.GetCart(email, productId);
+
+            if (c == null)
+            {
+                _cartRepo.AddToCart(new CartD()
+                {
+                    UserEmail = email,
+                    ProductId_FK = productId, Quantity = qty
+                });
+            }
+            else
+            {
+                UpdateQtyInCart(email, productId, qty);
+            }
         }
 
-        public IQueryable<CartViewModel> GetProductsCart()
+        public void UpdateQtyInCart(string email, Guid productId, int qty)
         {
-            return _cartsRepo.GetProductsCart().ProjectTo<CartViewModel>(_mapper.ConfigurationProvider);
-        }
+            CartD originalCart = null;
 
-    
-        
+            originalCart.Quantity = qty;
+
+            _cartRepo.UpdateCart(originalCart);
+        }
     }
 }

@@ -20,6 +20,18 @@ namespace Presentation.Controllers
 
         public IActionResult Index()
         {
+            try
+            {
+                _logger.LogInformation("Index method started");
+               
+                _logger.LogWarning("About to raise an exepction");
+
+            }
+
+            catch (Exception ex)
+            {
+                _logger.LogError("Message occured: " + ex.Message);
+            }
             return View();
         }
 

@@ -12,21 +12,31 @@ namespace Presentation.Controllers
         [Authorize]
         public IActionResult Checkout()
         {
-            string emailOfTheUserWhoIsLoggedIn = User.Identity.Name;
+            try
+            {
+                string emailOfTheUserWhoIsLoggedIn = User.Identity.Name;
 
-           //1. get a list of products inside the ShoppingCart table belonging to the logged in user
+                //1. get a list of products inside the ShoppingCart table belonging to the logged in user
 
-            //2. create an order
 
-            //3. loop inside the list brought from (1) 
+                //2. create an order
+
+                //3. loop inside the list brought from (1) 
                 //for every product
                 //3.1 check first the stock
                 //3.2 deduct qty from stock
                 //3.3 insert an order detail
 
-        //4. remove items from the ShoppingCart Table for the logged in user
+                //4. remove items from the ShoppingCart Table for the logged in user
 
-            return View();
-        }
+                return View();
+            }
+
+            catch(Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+       }
+       
     }
 }

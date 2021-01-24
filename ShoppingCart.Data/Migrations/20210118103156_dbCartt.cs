@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ShoppingCart.Data.Migrations
 {
-    public partial class AddingCartDb : Migration
+    public partial class dbCartt : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,15 +11,14 @@ namespace ShoppingCart.Data.Migrations
                 name: "CartDetails",
                 columns: table => new
                 {
-                    cartId = table.Column<Guid>(nullable: false),
-                    productName = table.Column<string>(nullable: true),
-                    Price = table.Column<double>(nullable: false),
+                    CartId = table.Column<Guid>(nullable: false),
+                    ProductId_FK = table.Column<Guid>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
-                    userEmail = table.Column<string>(nullable: true)
+                    UserEmail = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CartDetails", x => x.cartId);
+                    table.PrimaryKey("PK_CartDetails", x => x.CartId);
                 });
         }
 

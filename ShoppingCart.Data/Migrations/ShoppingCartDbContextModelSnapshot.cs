@@ -19,25 +19,22 @@ namespace ShoppingCart.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ShoppingCart.Domain.Models.Cart", b =>
+            modelBuilder.Entity("ShoppingCart.Domain.Models.CartD", b =>
                 {
-                    b.Property<Guid>("cartId")
+                    b.Property<Guid>("CartId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<Guid>("ProductId_FK")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("productName")
+                    b.Property<string>("UserEmail")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("userEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("cartId");
+                    b.HasKey("CartId");
 
                     b.ToTable("CartDetails");
                 });
